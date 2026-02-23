@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="start()">Start Tracking</button>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  databaseURL: "YOUR_DATABASE_URL"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function start() {
+  navigator.geolocation.watchPosition((pos) => {
+    db.ref("location").set({
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude
+    });
+  });
+}
+</script>
+
+</body>
+</html>
